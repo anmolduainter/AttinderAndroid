@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.util.LruCache;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -31,6 +33,7 @@ public class FontsOverride {
 
     public static final String FONT_PROXIMA_NOVA = "ProximaNova.ttf";
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void applyFontForToolbarTitle(Activity act, String fontName, Window window){
 
         ActionBar ab = act.getActionBar();

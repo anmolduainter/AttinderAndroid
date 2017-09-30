@@ -16,10 +16,9 @@ public class Batch {
         batches.add("Crux");
         batches.add("Pandora");
         batches.add("Launchpad");
-
         batches.add("Elixir");
-
         batches.add("Django");
+
         return batches;
 
     }

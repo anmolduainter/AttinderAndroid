@@ -2,8 +2,10 @@ package com.codingblocks.attendancetracker;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private String selectedBatch;
     private MyAdapter myAdapter;
 
-    private LinearLayout background;
+    private RelativeLayout background;
 
     private ArrayList<Student> students;
 
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
-        background = (LinearLayout) findViewById(R.id.activity_main);
+        background = (RelativeLayout) findViewById(R.id.activity_main);
         spinner = (CustomSpinner) findViewById(R.id.spinner_batch);
         coursebutton = (FloatingActionButton) findViewById(R.id.create_course_button);
         coursebutton.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
             public void cardSwipedLeft(int position) {
+                //Absent
                 background.setBackgroundColor(Color.RED);
                 handler.postDelayed(run, 200);
                 absentIds.add(students.get(position).getUniqueId());
@@ -131,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void cardSwipedRight(int position) {
-                //present
+                //Present
                 background.setBackgroundColor(Color.GREEN);
                 handler.postDelayed(run, 200);
                 presentIds.add(students.get(position).getUniqueId());
